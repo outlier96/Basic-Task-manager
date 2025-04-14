@@ -23,6 +23,6 @@ A simple Django-based task manager that allows users to create, track, and manag
 - Bootstrap 5
 - SQLite (default)
 - emojis
-- Hosted with: PythonAnywhere / GitHub Pages (optional)
+
 
 ---
