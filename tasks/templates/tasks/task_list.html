@@ -1,0 +1,68 @@
+{% extends 'tasks/base.html' %}
+{% load static %}
+
+{% block title %}Your Tasks{% endblock %}
+
+{% block content %}
+<h2>Welcome, {{ request.user.username }}</h2>
+
+<div class="row text-center mb-4">
+  <div class="col-md-4 mb-3">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">✅ Completed</h5>
+        <p class="display-6">{{ completed_count }}</p>
+        <a href="?filter=completed" class="btn btn-sm btn-outline-success">View</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 mb-3">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">🕒 Pending</h5>
+        <p class="display-6">{{ pending_count }}</p>
+        <a href="?filter=pending" class="btn btn-sm btn-outline-warning">View</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 mb-3">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">🔥 High Priority</h5>
+        <p class="display-6">{{ high_priority_count }}</p>
+        <a href="?filter=high" class="btn btn-sm btn-outline-danger">View</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2 class="mb-0">My Tasks</h2>
+  <a href="{% url 'add_task' %}" class="btn btn-primary">+ Add Task</a>
+</div>
+
+<div class="mb-3">
+  <a href="{% url 'task_list' %}" class="btn btn-outline-primary btn-sm {% if not request.GET.filter %}active{% endif %}">All</a>
+  <a href="?filter=pending" class="btn btn-outline-warning btn-sm {% if request.GET.filter == 'pending' %}active{% endif %}">Pending</a>
+  <a href="?filter=completed" class="btn btn-outline-success btn-sm {% if request.GET.filter == 'completed' %}active{% endif %}">Completed</a>
+  <a href="?filter=high" class="btn btn-outline-danger btn-sm {% if request.GET.filter == 'high' %}active{% endif %}">High Priority</a>
+  <a href="?filter=overdue" class="btn btn-outline-dark btn-sm {% if request.GET.filter == 'overdue' %}active{% endif %}">Overdue</a>
+</div>
+
+<ul class="list-group">
+  {% for task in tasks %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <div>
+        <strong>{{ task.title }}</strong>
+        <br>
+        <small class="text-muted">{{ task.due_date }}</small>
+      </div>
+      <div>
+        <a href="{% url 'edit_task' task.id %}" class="btn btn-sm btn-outline-secondary">Edit</a>
+      </div>
+    </li>
+  {% empty %}
+    <li class="list-group-item">No tasks yet.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

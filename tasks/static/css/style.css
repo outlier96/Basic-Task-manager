@@ -1,0 +1,24 @@
+body.dark-mode {
+    background-color: #1e1e2f;
+    color: #ffffff;
+}
+
+.dark-mode .card {
+    background-color: #2a2a3d;
+    border-color: #444;
+}
+
+.dark-mode .list-group-item {
+    background-color: #2a2a3d;
+    color: #eee;
+}
+
+.dark-mode .btn-outline-secondary {
+    color: #ccc;
+    border-color: #777;
+}
+
+.dark-mode .btn-outline-secondary:hover {
+    background-color: #444;
+    color: #fff;
+}
